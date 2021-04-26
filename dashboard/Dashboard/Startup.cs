@@ -1,5 +1,9 @@
+using dashboard.context.IServices;
+using dashboard.context.Model;
+using dashboard.data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,6 +23,15 @@ namespace dashboard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<DashboardContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DashboardDatabase")));
+
+            services.AddScoped<IUserService, UserService>();
+
+            services.AddControllers();
+
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

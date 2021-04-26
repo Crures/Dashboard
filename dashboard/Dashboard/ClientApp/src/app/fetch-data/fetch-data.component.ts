@@ -1,23 +1,28 @@
-import { Component, Inject } from '@angular/core';
+import { User } from './../_Globals/Models/User';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
-export class FetchDataComponent {
-  public forecasts: WeatherForecast[];
+export class FetchDataComponent implements OnInit {
+  asd: User;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+  constructor(private http: HttpClient) {
+    // http.get<User[]>('api/User/getUsers').subscribe(result => {
+    //   console.log(1);
+    // }, error => console.error(error));
   }
-}
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  Test() {
+    console.log(1);
+    return this.http.get('api/User/getUsers');
+  }
+
+  ngOnInit() {
+    
+    this.Test();
+  }
+
 }
