@@ -1,6 +1,8 @@
-using dashboard.context.IServices;
+using dashboard.context.ICommands;
+using dashboard.context.IQueries;
 using dashboard.context.Model;
-using dashboard.data.Services;
+using dashboard.data.Commands;
+using dashboard.data.Queries;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +29,8 @@ namespace dashboard
             services.AddDbContext<DashboardContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DashboardDatabase")));
 
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserQueries, UserQueries>();
+            services.AddScoped<IUserCommands, UserCommands>();
 
             services.AddControllers();
 

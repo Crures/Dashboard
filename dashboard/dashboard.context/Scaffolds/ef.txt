@@ -1,0 +1,1 @@
+﻿IF((get-project).projectname -eq "dashboard.context"){Scaffold-DBContext "Server=tcp:projectdashboard.database.windows.net,1433;Database=project_dashboard; Persist Security Info=False;User ID=Projectroot;Password=R00t1234;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -Context "DashboardContext" -DataAnnotations} else {"Select dashboard.context"}
