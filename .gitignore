@@ -1,5 +1,6 @@
 dashboard/.vs/dashboard/v16/.suo
 dashboard/dashboard.context/obj/Debug/net5.0/dashboard.context.csprojAssemblyReference.cache
 dashboard/dashboard.data/obj/Debug/net5.0/dashboard.data.csprojAssemblyReference.cache
-dashboard/Dashboard/ClientApp/package.json
+dashboard/Dashboard/ClientApp/angular.json
 dashboard/Dashboard/ClientApp/package-lock.json
+dashboard/Dashboard/ClientApp/package.json
