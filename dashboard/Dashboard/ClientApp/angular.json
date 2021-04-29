@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Project1": {
+    "dashboard": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -116,7 +116,7 @@
         }
       }
     },
-    "Project1-e2e": {
+    "dashboard-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
