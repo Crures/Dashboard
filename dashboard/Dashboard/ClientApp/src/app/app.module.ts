@@ -12,6 +12,14 @@ import { CounterComponent } from './counter/counter.component';
 import { DatetimeComponent } from './dashboard/widgets/datetime/datetime.component';
 import { ClickerComponent } from './dashboard/widgets/clicker/clicker.component';
 import { LoginComponent } from './login/login.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import * as moment from 'moment';
+
+
+export function momentAdapterFactory() {
+  return adapterFactory(moment);
+};
 
 @NgModule({
   declarations: [
@@ -26,12 +34,17 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: DashboardComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-    ])
+    ]),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
   ],
   providers: [],
   bootstrap: [AppComponent]
