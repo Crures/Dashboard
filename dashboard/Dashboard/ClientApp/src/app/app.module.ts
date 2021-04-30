@@ -7,25 +7,30 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { CounterComponent } from './counter/counter.component';
+import { DatetimeComponent } from './dashboard/widgets/datetime/datetime.component';
+import { ClickerComponent } from './dashboard/widgets/clicker/clicker.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
+    DashboardComponent,
     CounterComponent,
-    BetereCounterComponent
+    BetereCounterComponent,
+    DatetimeComponent,
+    ClickerComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'betere-counter', component: BetereCounterComponent },
+      { path: '', component: DashboardComponent, pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
     ])
   ],
   providers: [],
