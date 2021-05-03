@@ -9,5 +9,6 @@ export class ClickerComponent {
 
   public incrementCounter() {
     this.currentCount++;
+    
   }
 }
