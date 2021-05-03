@@ -20,7 +20,7 @@ namespace dashboard.Controllers
             _userQueries = userQueries;
             _userCommands = userCommands;
         }
-        // GET: api/User/getUsers
+        // GET: api/User/
         [HttpGet]
         public List<User> Get()
         {
@@ -40,12 +40,13 @@ namespace dashboard.Controllers
         [HttpPost]
         public void Post(User user)
         {
+            _userCommands.CreateUser(user);
             // var cmd = _userCommands.CreateUser(user);
             // hier moet nog een http callback
             // serviceresult of actionresult
         }
 
-        // DELETE api/<UserController>/5
+        // DELETE api/User/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

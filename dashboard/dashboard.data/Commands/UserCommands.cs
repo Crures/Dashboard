@@ -24,6 +24,7 @@ namespace dashboard.data.Commands
 
             _context.Entry(entity).CurrentValues.SetValues(user);
             _context.SaveChanges();
+
         }
     }
 }
