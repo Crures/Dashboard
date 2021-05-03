@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'app-dashboard-widgets-datetime',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './datetime.component.html',
+  styles: ['./datetime.component.scss']
 })
 export class DatetimeComponent implements OnInit, OnDestroy {
   view: CalendarView = CalendarView.Week;
@@ -57,7 +58,7 @@ export class DatetimeComponent implements OnInit, OnDestroy {
         if (foundBreakpoint) {
           this.daysInWeek = foundBreakpoint.daysInWeek;
         } else {
-          this.daysInWeek = 5;
+          this.daysInWeek = 1;
         }
         this.cd.markForCheck();
       });
