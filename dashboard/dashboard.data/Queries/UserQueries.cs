@@ -26,16 +26,18 @@ namespace dashboard.data.Queries
             return _connection.Query<User>(qry).ToList();
         }
 
-        public User FetchUser(string email)
+        public User FetchUser(int id)
         {
-            var param = new { Email = email };
-            var qry = "SELECT [Id], [Email], [Role], [Dashboard], [Timestamp] FROM [Users] WHERE [Email] = @Email";
+            var param = new { id };
+            var qry = "SELECT [Id], [Email], [Role], [Dashboard], [Timestamp] FROM [Users] WHERE [Id] = @Id";
             return _connection.QueryFirstOrDefault<User>(qry, param);
         }
 
-        public User FetchUser(int id)
+        public User Authenticate(User user)
         {
-            throw new System.NotImplementedException();
+            var param = new { user.Email, user.Password };
+            var qry = "SELECT [Id], [Email], [Role], [Dashboard], [Timestamp] FROM [Users] WHERE [Email] = @email AND [Password] = @password";
+            return _connection.QueryFirstOrDefault<User>(qry, param);
         }
     }
 }

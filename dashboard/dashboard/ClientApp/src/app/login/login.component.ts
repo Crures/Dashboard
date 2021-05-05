@@ -1,6 +1,8 @@
+import { AuthenticationService } from './../_Globals/service/authentication.service';
 import { Component } from '@angular/core';
 import { User } from '../_Globals/Models/User';
-import { ConfigService } from '../_Globals/service/config.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -8,22 +10,26 @@ import { ConfigService } from '../_Globals/service/config.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  users: User[]=[];
-  user: User;
-  login: User = new User();
-  constructor(private ConfigService: ConfigService){
-    // ConfigService.getUsers().subscribe(users => {this.user = users; console.log(this.user)});
-  }
-  
-  asd(){
-    this.ConfigService.getUsers().subscribe(users => {this.users = users; console.log(this.users)});
-    
+  loginCred: User = new User();
+  returnUrl: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, private auth: AuthenticationService) {
+    if (this.auth.currentUserValue) {
+      this.router.navigate(['/']);
+    }
   }
 
-  dsa() {
-    console.log(this.login);
-    
-    this.ConfigService.getUser(this.login).subscribe(user => {this.user = user; console.log(this.user)});
+  login() {
+    this.auth.login(this.loginCred.email, this.loginCred.password)
+    .pipe(first())
+    .subscribe(
+        data => {
+            this.router.navigate(['/']);
+            // this.router.navigate([this.returnUrl]);
+        },
+        error => {
+            console.log(error);
+            
+        });
   }
 }
-

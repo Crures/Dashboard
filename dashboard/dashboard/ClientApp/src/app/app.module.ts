@@ -1,21 +1,16 @@
-import { BetereCounterComponent } from './betere-counter/betere-counter.page';
+import { DashboardDeclarationsComponent } from './dashboard/widgets/dashboard.imports';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { CounterComponent } from './counter/counter.component';
-import { DatetimeComponent } from './dashboard/widgets/datetime/datetime.component';
-import { ClickerComponent } from './dashboard/widgets/clicker/clicker.component';
 import { LoginComponent } from './login/login.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
-
+import { appRoutingModule } from './app.routing';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -25,11 +20,7 @@ export function momentAdapterFactory() {
   declarations: [
     AppComponent,
     NavMenuComponent,
-    DashboardComponent,
-    CounterComponent,
-    BetereCounterComponent,
-    DatetimeComponent,
-    ClickerComponent,
+    DashboardDeclarationsComponent,
     LoginComponent
   ],
   imports: [
@@ -40,10 +31,7 @@ export function momentAdapterFactory() {
     }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: DashboardComponent, pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-    ]),
+    appRoutingModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
   ],
   providers: [],
