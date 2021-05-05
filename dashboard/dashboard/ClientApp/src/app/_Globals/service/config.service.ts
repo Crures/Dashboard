@@ -4,7 +4,9 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { User } from '../Models/User';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ConfigService {
   constructor(private http: HttpClient) { }
 
