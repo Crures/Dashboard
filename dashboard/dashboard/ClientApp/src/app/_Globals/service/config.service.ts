@@ -9,6 +9,6 @@ export class ConfigService {
   constructor(private http: HttpClient) { }
 
   getUsers() {
-    return this.http.get<User>('/api/User');
+    return this.http.get<User[]>('/api/User');
   }
 }
