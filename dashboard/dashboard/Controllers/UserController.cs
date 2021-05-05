@@ -20,7 +20,7 @@ namespace dashboard.Controllers
             _userQueries = userQueries;
             _userCommands = userCommands;
         }
-        // GET: api/User/getUsers
+        // GET: api/User/
         [HttpGet]
         public List<User> Get()
         {
@@ -30,7 +30,7 @@ namespace dashboard.Controllers
 
         // GET api/User/5
         [HttpGet("{id}")]
-        public User Get(int id)
+        public User Get(string id)
         {
             var qry = _userQueries.FetchUser(id);
             return qry;

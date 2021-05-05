@@ -7,5 +7,6 @@ namespace dashboard.context.IQueries
     {
         public List<User> FetchUsers();
         public User FetchUser(int id);
+        public User FetchUser(string email);
     }
 }

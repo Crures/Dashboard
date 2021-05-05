@@ -8,14 +8,22 @@ import { ConfigService } from '../_Globals/service/config.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  user: User[]=[];
+  users: User[]=[];
+  user: User;
+  login: User = new User();
   constructor(private ConfigService: ConfigService){
     // ConfigService.getUsers().subscribe(users => {this.user = users; console.log(this.user)});
   }
   
   asd(){
-    this.ConfigService.getUsers().subscribe(users => {this.user = users; console.log(this.user)});
+    this.ConfigService.getUsers().subscribe(users => {this.users = users; console.log(this.users)});
     
+  }
+
+  dsa() {
+    console.log(this.login);
+    
+    this.ConfigService.getUser(this.login).subscribe(user => {this.user = user; console.log(this.user)});
   }
 }
 
