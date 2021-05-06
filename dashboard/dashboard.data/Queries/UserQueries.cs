@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using dashboard.context.IQueries;
 using dashboard.context.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace dashboard.data.Queries
 {

@@ -37,10 +37,12 @@ namespace dashboard.Controllers
         }
 
         [HttpPost("authenticate")]
-        public User Auth(User user)
+        public IActionResult Auth(User user)
         {
             var qry = _userQueries.Authenticate(user);
-            return qry;
+            if (qry == null)
+                return NotFound("Wrong email or password");
+            return Ok(qry);
         }
 
         // POST api/<UserController>

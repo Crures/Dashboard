@@ -12,6 +12,7 @@ import { first } from 'rxjs/operators';
 export class LoginComponent {
   loginCred: User = new User();
   returnUrl: string;
+  errorMsg: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private auth: AuthenticationService) {
     if (this.auth.currentUserValue) {
@@ -28,7 +29,7 @@ export class LoginComponent {
             // this.router.navigate([this.returnUrl]);
         },
         error => {
-            console.log(error);
+            this.errorMsg = error.error;
             
         });
   }
