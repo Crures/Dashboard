@@ -25,7 +25,6 @@ export class LoginComponent {
     .subscribe(
         data => {
             this.router.navigate(['/']);
-            // this.router.navigate([this.returnUrl]);
         },
         error => {
             console.log(error);

@@ -1,13 +1,16 @@
 
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" >
         <h5 class="card-title">Datetime</h5>
-
-         
-          <mwl-calendar-week-view class="calendarscroll" [viewDate]="viewDate" [daysInWeek]="daysInWeek">
-          </mwl-calendar-week-view>
-          
-
+        <p >Description:  <span *ngIf="calEvent">{{calEvent.description}}</span>
+        </p>
+        <mwl-calendar-day-view [events]="calendarEvents" [refresh]="refresh" (beforeViewRender)="updateCalendarEvents($event)" class="calendarscroll" 
+          [viewDate]="viewDate" [dayStartHour]="9"
+          [dayEndHour]="17" (eventClicked)="eventClicked($event.event)"
+          >
+        </mwl-calendar-day-view> 
+        
     </div>
-</div>
+</div> 
+
 

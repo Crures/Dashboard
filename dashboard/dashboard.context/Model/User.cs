@@ -18,5 +18,6 @@ namespace dashboard.context.Model
         public string Password { get; set; }
         public int? Role { get; set; }
         public string Dashboard { get; set; }
+        public byte[] Timestamp { get; set; }
     }
 }

@@ -27,12 +27,12 @@ export function momentAdapterFactory() {
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     CalendarModule.forRoot({
       provide: DateAdapter,
-      useFactory: adapterFactory,
+      useFactory: momentAdapterFactory,
     }),
     HttpClientModule,
     FormsModule,
     appRoutingModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory })
+
   ],
   providers: [],
   bootstrap: [AppComponent]

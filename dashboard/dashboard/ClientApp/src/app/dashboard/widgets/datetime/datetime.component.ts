@@ -1,70 +1,74 @@
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  OnDestroy,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { CalendarView } from 'angular-calendar';
+  CalendarDayViewBeforeRenderEvent, CalendarEvent, CalendarMonthViewBeforeRenderEvent,
+  CalendarView, CalendarWeekViewBeforeRenderEvent,
+} from 'angular-calendar';
+import * as moment from 'moment';
+import { ViewPeriod } from 'Calendar-Utils';
+import { ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { CalendarService } from 'src/app/_Globals/service/calendar.service';
+import { CalendarModel } from 'src/app/_Globals/Models/CalendarModel';
+import { AuthenticationService } from 'src/app/_Globals/service/authentication.service';
+
+
 
 @Component({
   selector: 'app-dashboard-widgets-datetime',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './datetime.component.html',
   styles: ['./datetime.component.scss']
 })
-export class DatetimeComponent implements OnInit, OnDestroy {
-  view: CalendarView = CalendarView.Week;
 
-  viewDate: Date = new Date();
-
-  daysInWeek = 7;
-
-  private destroy$ = new Subject();
+export class DatetimeComponent {
+  calendarEvents: CalendarEvent[];
+  calEvent: CalendarModel;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private cd: ChangeDetectorRef
-  ) {}
-
-  ngOnInit() {
-    const CALENDAR_RESPONSIVE = {
-      small: {
-        breakpoint: '(max-width: 576px)',
-        daysInWeek: 2,
-      },
-      medium: {
-        breakpoint: '(max-width: 768px)',
-        daysInWeek: 3,
-      },
-      large: {
-        breakpoint: '(max-width: 960px)',
-        daysInWeek: 5,
-      },
-    };
-
-    this.breakpointObserver
-      .observe(
-        Object.values(CALENDAR_RESPONSIVE).map(({ breakpoint }) => breakpoint)
-      )
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((state: BreakpointState) => {
-        const foundBreakpoint = Object.values(CALENDAR_RESPONSIVE).find(
-          ({ breakpoint }) => !!state.breakpoints[breakpoint]
-        );
-        if (foundBreakpoint) {
-          this.daysInWeek = foundBreakpoint.daysInWeek;
-        } else {
-          this.daysInWeek = 1;
-        }
-        this.cd.markForCheck();
-      });
+    private cdr: ChangeDetectorRef, private calendarService: CalendarService, private authService: AuthenticationService, 
+  ) {
+    this.calendarService.getEventsForUser(authService.currentUserValue.id).toPromise().then(b => {
+      b.forEach(element => {
+        element.start = new Date(element.start);
+        element.end = new Date(element.end);
+      }); 
+      this.calendarEvents = b;
+    });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
+  eventClicked( event : CalendarEvent ){
+    
+    this.calendarService.getCalendarEvent(+event.id).toPromise().then(
+      b => this.calEvent = b
+    );
+  }
+  
+  view: CalendarView = CalendarView.Week;
+
+  viewDate = moment().toDate();
+  refresh: Subject<any> = new Subject();
+
+
+funk(){}
+
+  viewPeriod: ViewPeriod;
+
+  updateCalendarEvents(
+    viewRender:
+      | CalendarMonthViewBeforeRenderEvent
+      | CalendarWeekViewBeforeRenderEvent
+      | CalendarDayViewBeforeRenderEvent
+  ): void {
+    // console.log(this.calendarEvents);
+    if (
+      
+      !this.viewPeriod ||
+      !moment(this.viewPeriod.start).isSame(viewRender.period.start) ||
+      !moment(this.viewPeriod.end).isSame(viewRender.period.end)
+    ) {
+      this.viewPeriod = viewRender.period;
+
+      this.cdr.detectChanges();
+    }
   }
 }
