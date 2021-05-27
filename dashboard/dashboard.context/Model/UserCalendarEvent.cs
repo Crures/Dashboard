@@ -8,16 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dashboard.context.Model
 {
-    public partial class User
+    [Table("UserCalendarEvent")]
+    public partial class UserCalendarEvent
     {
         [Key]
         public int Id { get; set; }
-        [StringLength(255)]
-        public string Email { get; set; }
-        [StringLength(255)]
-        public string Password { get; set; }
-        public int? Role { get; set; }
-        public string Dashboard { get; set; }
-        public byte[] Timestamp { get; set; }
+        public int User { get; set; }
+        public int CalendarEvent { get; set; }
     }
 }

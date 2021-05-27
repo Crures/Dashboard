@@ -20,7 +20,7 @@ namespace dashboard.Controllers
             _userQueries = userQueries;
             _userCommands = userCommands;
         }
-        // GET: api/User/getUsers
+        // GET: api/User/
         [HttpGet]
         public List<User> Get()
         {
@@ -33,6 +33,13 @@ namespace dashboard.Controllers
         public User Get(int id)
         {
             var qry = _userQueries.FetchUser(id);
+            return qry;
+        }
+
+        [HttpPost("authenticate")]
+        public User Auth(User user)
+        {
+            var qry = _userQueries.Authenticate(user);
             return qry;
         }
 

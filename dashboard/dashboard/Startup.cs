@@ -31,6 +31,8 @@ namespace dashboard
 
             services.AddScoped<IUserQueries, UserQueries>();
             services.AddScoped<IUserCommands, UserCommands>();
+            services.AddScoped<ICalendarQueries, CalendarQueries>();
+            services.AddScoped<ICalendarCommands, CalendarCommands>();
 
             services.AddControllers();
 
