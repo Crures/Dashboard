@@ -23,8 +23,8 @@ namespace dashboard.data.Queries
         public List<CalendarEvent> FetchCalendarEventsForUser(int id)
         {
             var param = new { id };
-            var qry = "SELECT [Id], [Start], [End], [Title], [Couleur], [Createur],[Description] FROM [CalendarEvent] WHERE [Createur] = @Id";
-            return _connection.Query<CalendarEvent>(qry, param).ToList();
+            var qry = "SELECT * FROM CalendarEvent WHERE Id IN (SELECT CalendarEvent FROM [UserCalendarEvent] WHERE [User] = @Id) AND [start] >= GETDATE() and [start] < GETDATE()+1";
+            return  _connection.Query<CalendarEvent>(qry, param).ToList();
         }
 
         public CalendarEvent FetchEvent(int id)
