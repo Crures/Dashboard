@@ -77,6 +77,18 @@ namespace dashboard.context.Model
             modelBuilder.Entity<UserCalendarEvent>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.CalendarEventNavigation)
+                    .WithMany(p => p.UserCalendarEvents)
+                    .HasForeignKey(d => d.CalendarEvent)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserCalendarEvent_CalendarEvent");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.UserCalendarEvent)
+                    .HasForeignKey<UserCalendarEvent>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserCalendarEvent_Users");
             });
 
             OnModelCreatingPartial(modelBuilder);

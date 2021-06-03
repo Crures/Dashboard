@@ -20,6 +20,7 @@ namespace dashboard.data.Queries
             _context = context;
             _connection = _context.Database.GetDbConnection();
         }
+
         public List<CalendarEvent> FetchCalendarEventsForUser(int id)
         {
             var param = new { id };

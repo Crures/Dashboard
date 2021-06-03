@@ -49,7 +49,18 @@ export class DatetimeComponent {
   refresh: Subject<any> = new Subject();
 
 
-funk(){}
+   CreateEvent(){
+     let calM = new CalendarModel;
+     calM.start = new Date;
+     calM.end = new Date;
+     calM.title = "titel";
+     calM.couleur = "#000000";
+     calM.createur = 123;
+     calM.description = "descr";
+
+     this.calendarService.createEvent(calM);
+    }
+  
 
   viewPeriod: ViewPeriod;
 

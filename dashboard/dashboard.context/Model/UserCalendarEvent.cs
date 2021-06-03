@@ -15,5 +15,12 @@ namespace dashboard.context.Model
         public int Id { get; set; }
         public int User { get; set; }
         public int CalendarEvent { get; set; }
+
+        [ForeignKey(nameof(CalendarEvent))]
+        [InverseProperty("UserCalendarEvents")]
+        public virtual CalendarEvent CalendarEventNavigation { get; set; }
+        [ForeignKey(nameof(Id))]
+        [InverseProperty("UserCalendarEvent")]
+        public virtual User IdNavigation { get; set; }
     }
 }

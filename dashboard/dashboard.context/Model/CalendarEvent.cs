@@ -11,6 +11,11 @@ namespace dashboard.context.Model
     [Table("CalendarEvent")]
     public partial class CalendarEvent
     {
+        public CalendarEvent()
+        {
+            UserCalendarEvents = new HashSet<UserCalendarEvent>();
+        }
+
         [Key]
         public int Id { get; set; }
         [Column(TypeName = "datetime")]
@@ -23,5 +28,8 @@ namespace dashboard.context.Model
         public string Couleur { get; set; }
         public int Createur { get; set; }
         public string Description { get; set; }
+
+        [InverseProperty(nameof(UserCalendarEvent.CalendarEventNavigation))]
+        public virtual ICollection<UserCalendarEvent> UserCalendarEvents { get; set; }
     }
 }

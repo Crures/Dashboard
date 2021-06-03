@@ -19,8 +19,17 @@ namespace dashboard.Controllers
             _calendarCommands = calendarCommands;
         }
 
+        [HttpPost]
+        public void Post(CalendarEvent calEvent)
+        {
+            _calendarCommands.CreateEvent(calEvent);
+            _calendarCommands.CreateUserCalendarevent(calEvent);
 
-         //GET: api/<ValuesController>
+            // hier moet nog een http callback
+            // serviceresult of actionresult
+        }
+
+        //GET: api/<ValuesController>
         [HttpGet("GetUserEvents/{id}")]
         public List<CalendarEvent> Get(int id)
         {

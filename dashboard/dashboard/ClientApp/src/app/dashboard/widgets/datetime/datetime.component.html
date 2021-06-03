@@ -2,8 +2,8 @@
 <div class="card">
     <div class="card-body" >
         <h5 class="card-title">Datetime</h5>
-        <p >Description:  <span *ngIf="calEvent">{{calEvent.description}}</span>
-        </p>
+        <p >Description:  <span *ngIf="calEvent">{{calEvent.description}}</span> 
+        </p><button (click)="CreateEvent()">CREATEEVENT</button>
         <mwl-calendar-day-view [events]="calendarEvents" [refresh]="refresh" (beforeViewRender)="updateCalendarEvents($event)" class="calendarscroll" 
           [viewDate]="viewDate" [dayStartHour]="9"
           [dayEndHour]="17" (eventClicked)="eventClicked($event.event)"
