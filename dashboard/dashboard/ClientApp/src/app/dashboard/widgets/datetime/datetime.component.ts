@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { CalendarService } from 'src/app/_Globals/service/calendar.service';
 import { CalendarModel } from 'src/app/_Globals/Models/CalendarModel';
 import { AuthenticationService } from 'src/app/_Globals/service/authentication.service';
+import { CalendarUsers } from 'src/app/_Globals/Models/CalendarUsers';
 
 
 
@@ -50,14 +51,15 @@ export class DatetimeComponent {
 
 
    CreateEvent(){
-     let calM = new CalendarModel;
+     let calM = new CalendarUsers;
      calM.start = new Date;
      calM.end = new Date;
-     calM.title = "titel";
+     calM.title = "titel123";
      calM.couleur = "#000000";
      calM.createur = 123;
      calM.description = "descr";
-
+     calM.users = [1,2,3];
+     
      this.calendarService.createEvent(calM);
     }
   

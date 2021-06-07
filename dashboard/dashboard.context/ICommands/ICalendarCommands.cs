@@ -9,7 +9,7 @@ namespace dashboard.context.ICommands
 {
     public interface ICalendarCommands
     {
-        public void CreateEvent(CalendarEvent calEvent);
-        public void CreateUserCalendarevent(CalendarEvent calEvent);
+        public CalendarEvent CreateEvent(CalendarEvent calEvent);
+        public void CreateUserCalendarevent(int calId, int userId);
     }
 }

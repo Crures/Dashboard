@@ -26,7 +26,7 @@ namespace dashboard.data.Queries
             return _connection.Query<User>(qry).ToList();
         }
 
-        public User FetchUser(int id)
+        public User FetchUser(int id) 
         {
             var param = new { id };
             var qry = "SELECT [Id], [Email], [Role], [Dashboard], [Timestamp] FROM [Users] WHERE [Id] = @Id";

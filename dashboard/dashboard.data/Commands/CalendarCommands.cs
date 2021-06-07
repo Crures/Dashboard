@@ -17,15 +17,26 @@ namespace dashboard.data.Commands
             _context = context;
         }
 
-        public void CreateEvent(CalendarEvent calEvent)
+        public CalendarEvent CreateEvent(CalendarEvent calEvent)
         {
-            _context.Add(calEvent);
+            var entity = _context.CalendarEvents.FirstOrDefault(g => g.Start == calEvent.Start
+            && g.End == calEvent.End && g.Title == calEvent.Title);
+            if (entity == null)
+            {
+                _context.Add(calEvent);
+            }
+
             _context.SaveChanges();
+            return calEvent;
         }
 
-        public void CreateUserCalendarevent(CalendarEvent calEvent)
+        public void CreateUserCalendarevent(int calId, int userId)
         {
-
+            var b = new UserCalendarEvent();
+            b.User = userId;
+            b.CalendarEvent = calId;
+            _context.Add(b);
+            _context.SaveChanges();
         }
     }
 }

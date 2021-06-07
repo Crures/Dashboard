@@ -20,13 +20,26 @@ namespace dashboard.Controllers
         }
 
         [HttpPost]
-        public void Post(CalendarEvent calEvent)
+        public IActionResult Post(CalendarUsers calu)
         {
-            _calendarCommands.CreateEvent(calEvent);
-            _calendarCommands.CreateUserCalendarevent(calEvent);
+            var calEvent = new CalendarEvent();
+            calEvent.Couleur = calu.Couleur;
+            calEvent.Createur = calu.Createur;
+            calEvent.Description = calu.Description;
+            calEvent.End = calu.End;
+            calEvent.Start = calu.Start;
+            calEvent.Title = calu.Title;
 
-            // hier moet nog een http callback
-            // serviceresult of actionresult
+            var cmd = _calendarCommands.CreateEvent(calEvent);
+
+            foreach (var userId in calu.users)
+            {
+                _calendarCommands.CreateUserCalendarevent(cmd.Id, userId);
+            }
+
+            if (cmd == null)
+                return NotFound("It already exists noob nerd");
+            return Ok(cmd);
         }
 
         //GET: api/<ValuesController>

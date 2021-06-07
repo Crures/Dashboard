@@ -1,5 +1,7 @@
+import { CalendarModel } from "./CalendarModel";
 
-export class CalendarModel {
+
+export class CalendarUsers {
     start: Date;
     end: Date;
     id: number;
@@ -7,5 +9,5 @@ export class CalendarModel {
     couleur: string;
     createur: number;
     description: string;
-    
+    users: number[];
 }

@@ -25,7 +25,11 @@ namespace dashboard.context.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=tcp:projectdashboard.database.windows.net,1433;Database=project_dashboard; Persist Security Info=False;User ID=Projectroot;Password=R00t1234;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -72,23 +76,6 @@ namespace dashboard.context.Model
                 entity.Property(e => e.Timestamp)
                     .IsRowVersion()
                     .IsConcurrencyToken();
-            });
-
-            modelBuilder.Entity<UserCalendarEvent>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.HasOne(d => d.CalendarEventNavigation)
-                    .WithMany(p => p.UserCalendarEvents)
-                    .HasForeignKey(d => d.CalendarEvent)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserCalendarEvent_CalendarEvent");
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.UserCalendarEvent)
-                    .HasForeignKey<UserCalendarEvent>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserCalendarEvent_Users");
             });
 
             OnModelCreatingPartial(modelBuilder);

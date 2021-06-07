@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
-
-#nullable disable
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace dashboard.context.Model
 {
-    [Table("CalendarEvent")]
-    public partial class CalendarEvent
+    public partial class CalendarUsers
     {
-        [Key]
+
         public int Id { get; set; }
-        [Column(TypeName = "datetime")]
+
         public DateTime Start { get; set; }
-        [Column(TypeName = "datetime")]
+
         public DateTime End { get; set; }
-        [Required]
+
         public string Title { get; set; }
-        [Required]
         public string Couleur { get; set; }
         public int Createur { get; set; }
         public string Description { get; set; }
+        public int[] users { get; set; }
+
     }
 }

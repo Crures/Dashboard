@@ -19,8 +19,5 @@ namespace dashboard.context.Model
         public int? Role { get; set; }
         public string Dashboard { get; set; }
         public byte[] Timestamp { get; set; }
-
-        [InverseProperty("IdNavigation")]
-        public virtual UserCalendarEvent UserCalendarEvent { get; set; }
     }
 }
