@@ -1,1 +1,77 @@
-<p>yo</p>
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-4"><br>
+
+
+
+    <div class="form-group">
+      <label class="form-control-label">Title</label>
+      <input type="text" name="title" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Description</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+    <label for="inputState">Color</label>
+    <select id="inputState" class="form-control">
+      <option selected>Choose...</option>
+      <option>jokergroen</option>
+      <option>kneitergeel</option>
+    </select>
+
+    <br>
+
+
+    <form class="form-inline">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="startDate" ngbDatepicker
+            #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">Select</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <ngb-timepicker [(ngModel)]="startDateTime"></ngb-timepicker>
+
+    <form class="form-inline">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp2" [(ngModel)]="endDate" ngbDatepicker
+            #n="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="n.toggle()" type="button">Select</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <ngb-timepicker [(ngModel)]="endDateTime"></ngb-timepicker>
+
+
+    <!-- <select >
+            <option *ngFor="let user of users">
+              {{user.email}}
+            </option>
+          </select> 
+
+
+
+        [multiple]="true" [closeOnSelect]="false" [searchable]="false"
+        [(ngModel)]="selectedPeople"
+        -->
+
+    <ng-select [items]="users"  bindLabel="email" [multiple]="true" [closeOnSelect]="false" [(ngModel)]="selectedPeople"
+      placeholder="Select people" >
+    </ng-select>
+
+  </div>
+  <div class="col-4"><br>
+
+  </div>
+  <div class="col-2"></div>
+</div>

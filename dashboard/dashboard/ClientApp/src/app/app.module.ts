@@ -11,6 +11,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
 import { appRoutingModule } from './app.routing';
+import { CreateEventComponent } from './create_event/create_event.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -21,7 +24,8 @@ export function momentAdapterFactory() {
     AppComponent,
     NavMenuComponent,
     DashboardDeclarationsComponent,
-    LoginComponent
+    LoginComponent,
+    CreateEventComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,7 +34,9 @@ export function momentAdapterFactory() {
       useFactory: momentAdapterFactory,
     }),
     HttpClientModule,
+    NgSelectModule,
     FormsModule,
+    NgbModule,
     appRoutingModule,
 
   ],
